@@ -13,8 +13,8 @@ namespace Src
         Random random = new Random();
         public Grass()
         {
-            for(var i = 0; i < 600; i++)
-                grass.Add(new GrassBlade2( new Vector2(100 + i * 3, 600), random.Next(50, 100), (float)random.Next(1, 100) / 10f));
+            for(var i = 0; i < 500; i++)
+                grass.Add(new GrassBlade2( new Vector2(100 + i * 2, 600), random.Next(50, 100), 5));
         }
         
         public void Update()

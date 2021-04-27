@@ -10,14 +10,16 @@ namespace Src
         static void Main(string[] args)
         {
             Raylib.InitWindow(1280, 720, "prototype");
-            Raylib.SetTargetFPS(60);
-            var thing = new Raycasting();
+            Raylib.SetWindowState(ConfigFlag.FLAG_WINDOW_RESIZABLE);
+     
+            var thing = new HookGame();
 
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.BLACK);
-                thing.Update();
+                if (Raylib.GetFrameTime() < 0.25)
+                    thing.Update();
                 Raylib.EndDrawing();
             }
         }
