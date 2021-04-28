@@ -12,7 +12,7 @@ namespace Src
             Raylib.InitWindow(1280, 720, "prototype");
             Raylib.SetWindowState(ConfigFlag.FLAG_WINDOW_RESIZABLE);
      
-            var thing = new HookGame();
+            var thing = new GameOfLife();
 
             while (!Raylib.WindowShouldClose())
             {

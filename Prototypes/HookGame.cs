@@ -1,6 +1,7 @@
-﻿using Raylib_cs;
-using System;
+﻿using System.Collections.Generic;
 using System.Numerics;
+using Raylib_cs;
+using System;
 
 namespace Src
 {
@@ -17,7 +18,7 @@ namespace Src
     {
         Vector2 position = Vector2.One * 300;
         float velocityY = 0;
-        float speed = 700;
+        float speed = 600;
         float gravity = 1000;
 
         public Vector2 dir = Vector2.Zero;
@@ -45,4 +46,5 @@ namespace Src
             Raylib.DrawCircle((int)position.X, (int)position.Y, 30, Color.WHITE);
         }
     }
+
 }
