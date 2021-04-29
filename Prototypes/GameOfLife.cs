@@ -7,9 +7,10 @@ namespace Src
 {
     class GameOfLife
     {
-        int cellSize = 20;
-        (int X, int Y) gridSize = (100, 100);
+        int cellSize = 5;
+        (int X, int Y) gridSize = (230, 130);
         List<List<bool>> state = new List<List<bool>>();
+        Random random = new Random();
 
         public GameOfLife()
         {
@@ -17,7 +18,7 @@ namespace Src
             {
                 var row = new List<bool>();
                 for (var x = 0; x < gridSize.X; x++)
-                    row.Add(false);
+                    row.Add(random.Next(0, 2) == 0 ? false : true);
                 state.Add(row);
             }
         }
@@ -50,6 +51,7 @@ namespace Src
                     var color = state[y][x] ? Color.GREEN : Color.BLUE;
                     Raylib.DrawRectangle(x * cellSize, y * cellSize, cellSize, cellSize, color);
                 }
+            Raylib.DrawFPS(1200, 0);
 
             var t = Raylib.MeasureText("PAUSED", 50);
             Raylib.DrawText(updateGrid ? "" : "PAUSED", Raylib.GetScreenWidth() / 2 - t / 2, Raylib.GetScreenHeight() / 2, 50, Color.WHITE);
