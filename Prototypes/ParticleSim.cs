@@ -28,6 +28,8 @@ namespace Src
                 }
         }
 
+        float timer = 0;
+
         bool updateState = false;
         public void Update()
         {
@@ -55,6 +57,13 @@ namespace Src
                     continue;
                 p1.Update(state);
             }
+
+            timer += delta;
+            if(timer > 0.1f)
+            {
+                Console.WriteLine(state.Count);
+                timer = 0;
+            }
         }
     }
 
@@ -69,6 +78,7 @@ namespace Src
         public Color color;
         public enum Type { Green, Red, Blue }
         public Type type;
+        Random random = new Random();
 
         public Particle(Vector2 position, float radius, float direction, float rotationSpeed, float walkSpeed, float effectRadius, Color color, Type type)
         {
@@ -78,17 +88,17 @@ namespace Src
 
         public static Particle GreenParticle(Vector2 position, float direction)
         {
-            return new Particle(position, 5, direction, 1, 10, 30, Color.GREEN, Type.Green);
+            return new Particle(position, 5, direction, 1, 10, 100, Color.GREEN, Type.Green);
         }
 
         public static Particle RedParticle(Vector2 position, float direction)
         {
-            return new Particle(position, 3, direction, 2, 25, 60, Color.RED, Type.Red);
+            return new Particle(position, 3, direction, 2, 25, 30, Color.RED, Type.Red);
         }
 
         public static Particle BlueParticle(Vector2 position, float direction)
         {
-            return new Particle(position, 7, direction, 3, 60, 30, Color.BLUE, Type.Blue);
+            return new Particle(position, 7, direction, 3, 60, 100, Color.BLUE, Type.Blue);
         }
 
         public void Update(List<Particle> state)
@@ -114,12 +124,11 @@ namespace Src
                 }
             }
 
-            position.X = Math.Clamp(position.X, 0, 1280);
-            position.Y = Math.Clamp(position.Y, 0, 1280);
 
             foreach (var p in effects)
             {
-                var vel = Vector2.Normalize(position - p.position) * delta;
+                var v = position - p.position;
+                var vel = v != Vector2.Zero ? Vector2.Normalize(position - p.position) * delta : new Vector2((float)random.NextDouble()) * 10;
                 if (type == Type.Green && p.type == Type.Red)
                     p.position += vel * p.walkSpeed;
                 if (type == Type.Blue && p.type == Type.Green)
@@ -128,6 +137,9 @@ namespace Src
                     p.position += vel * p.walkSpeed;
 
             }
+
+            position.X = Math.Clamp(position.X, 0, 1280);
+            position.Y = Math.Clamp(position.Y, 0, 720);
         }
 
         public void Draw()
@@ -135,7 +147,6 @@ namespace Src
             var vecdir = Util.AngleToVec(direction, 1);
             Raylib.DrawCircle((int)position.X, (int)position.Y, radius, color);
             //Raylib.DrawLineEx(position, position + vecdir * radius, 1, Color.BLACK);
-            Raylib.DrawRectangleLines(0, 0, 1280, 720, Color.WHITE);
             //Raylib.DrawCircleLines((int)position.X, (int)position.Y, effectRadius, color);
         }
     }

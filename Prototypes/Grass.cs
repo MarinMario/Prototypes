@@ -13,8 +13,8 @@ namespace Src
         Random random = new Random();
         public Grass()
         {
-            for(var i = 0; i < 500; i++)
-                grass.Add(new GrassBlade2( new Vector2(100 + i * 2, 600), random.Next(50, 100), 5));
+            for(var i = 0; i < 100; i++)
+                grass.Add(new GrassBlade2( new Vector2(100 + i * 11, 600), random.Next(50, 100), 5));
         }
         
         public void Update()
@@ -51,7 +51,7 @@ namespace Src
         public void Draw()
         {
             var vec = position + Util.AngleToVec(currentAngle, length);
-            Raylib.DrawLineV(position, vec, Color.GREEN);
+            Raylib.DrawLineEx(position, vec, 10, Color.GREEN);
             // Raylib.DrawCircleV(position, 5, Color.RED);
         }
     }

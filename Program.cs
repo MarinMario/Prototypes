@@ -13,7 +13,7 @@ namespace Src
             Raylib.SetWindowState(ConfigFlag.FLAG_WINDOW_RESIZABLE);
             var camera = new Camera2D(Vector2.Zero, Vector2.Zero, 0, 1);
      
-            var thing = new ParticleSim();
+            var thing = new Bow();
 
             while (!Raylib.WindowShouldClose())
             {
