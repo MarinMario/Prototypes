@@ -18,7 +18,7 @@ namespace Src
             {
                 var row = new List<bool>();
                 for (var x = 0; x < gridSize.X; x++)
-                    row.Add(random.Next(0, 2) == 0 ? false : true);
+                    row.Add(false);
                 state.Add(row);
             }
         }

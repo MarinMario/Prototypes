@@ -18,7 +18,7 @@ namespace Src
             var center = new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight()) / 2;
             Raylib.DrawLineEx(center, center + vec, 3, Color.RED);
 
-            rotation = MathF.PI / 2 - Util.VecToAngle(Vector2.Normalize(Raylib.GetMousePosition() - center));
+            rotation = MathF.PI / 2 - Util.VecToAngle(Vector2.Normalize(Program.cameraPos + Raylib.GetMousePosition() - center));
 
             foreach (var arrow in arrows)
                 arrow.Update();
